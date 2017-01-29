@@ -1,14 +1,17 @@
 const Node = require('./node');
 
 class LinkedList {
+
     constructor() {
+        this.length = 0;
         this._head = null;
         this._tail = null;
-        this.length = 0;
     }
 
     append(data) {
-        var node = new Node(data);
+        this.data = data;
+        var node = new Node(this.data);
+
         if (this.length == 0) {
             this._head = node;
             this._tail = node;
@@ -22,7 +25,6 @@ class LinkedList {
 
         return this;
     }
-
 
     head() {
         if (this._head == null) {
@@ -175,5 +177,6 @@ class LinkedList {
 
         return result;
     }
+}
 
 module.exports = LinkedList;
