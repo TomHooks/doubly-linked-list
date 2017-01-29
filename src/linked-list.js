@@ -143,23 +143,21 @@ class LinkedList {
     }
 
     reverse() {
-
-        var current = this._head;
-
-        while (current != null) {
-
-            var temp = current.prev;
+        var current = this._tail;
+        while(current) {
+            let temp = current.prev;
             current.prev = current.next;
             current.next = temp;
 
-            current = current.prev;
+            current =temp;
         }
 
-        var tempForHead = this._head;
+        let temp = this._head;
         this._head = this._tail;
-        this._tail = tempForHead;
+        this._tail = temp;
 
         return this;
+
     }
 
     indexOf(data) {
