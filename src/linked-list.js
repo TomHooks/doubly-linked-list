@@ -111,7 +111,7 @@ class LinkedList {
         this._tail = null;
         return this;
     }
-    
+
     deleteAt(index) {
         this.index = index;
         var current = this._head;
@@ -128,11 +128,11 @@ class LinkedList {
                 count++;
             }
 
-            var beforeNodeToDelete = current.prev;
-            var afterNodeToDelete = current.next;
+            var beforeNodeDelete = current.prev;
+            var afterNodeDelete = current.next;
 
-            beforeNodeToDelete.next = current.next;
-            afterNodeToDelete.prev = current.prev;
+            beforeNodeDelete.next = current.next;
+            afterNodeDelete.prev = current.prev;
 
             current = null;
         }
