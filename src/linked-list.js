@@ -9,21 +9,20 @@ class LinkedList {
     }
 
     append(data) {
-        this.data = data;
-        var node = new Node(this.data);
-
-        if (this.length == 0) {
+        var node = new Node(data);
+        if(!this._head){
             this._head = node;
             this._tail = node;
-        } else {
+        }
+        else {
             this._tail.next = node;
-            node.prev = this._tail;
+            node.prev  = this._tail;
             this._tail = node;
         }
 
         this.length++;
-
         return this;
+
     }
 
     head() {
