@@ -41,10 +41,21 @@ class LinkedList {
     }
 
     at(index) {
-        if(index > this.length || index < 0) return false;
+        this.index = index;
+        var current = this._head;
 
-        var current = this.search(index);
-
+        if (this.index == 0) {
+            // return this._head.data;
+        } else if (this.index == this.length - 1) {
+            current = this._tail;
+            // return this._tail.data;
+        } else {
+            var count = 0;
+            while (count < this.index) {
+                current = current.next;
+                count++;
+            }
+        }
         return current.data;
     }
 
@@ -89,8 +100,7 @@ class LinkedList {
     }
 
     isEmpty() {
-        if(!this.length) return true;
-        return false;
+        return (this.length == 0);
     }
 
     clear() {
@@ -101,36 +111,38 @@ class LinkedList {
         return this;
     }
 
-
     deleteAt(index) {
-        if(index > this.length || index < 0) throw new Error("IndexError. Wrong index.");
+        this.index = index;
+        var current = this._head;
 
-        var current = this.search(index);
+        if (this.index == 0) {
+            this._head = this._head.next;
+        } else if (this.index == this.length - 1) {
+            this._tail = this._tail.prev;
+        } else {
+            var count = 1;
 
-        if(current === this._head) {
-            if(current.next)  current.next.prev = null;
-            else this._tail = null;
+            while (count < this.index) {
+                current = current.next;
+                count++;
+            }
 
-            this._head = current.next;
+            var beforeNodeToDelete = current.prev;
+            var afterNodeToDelete = current.next;
 
+            beforeNodeToDelete.next = current.next;
+            afterNodeToDelete.prev = current.prev;
+
+            current = null;
         }
 
-        else if(current === this._tail) {
-            current.prev.next = null;
-            this._tail = current.prev;
+        this.length--;
 
-        }
-
-        else {
-            current.prev.next = current.next;
-            current.next.prev = current.prev;
-        }
-
-        this.length --;
         return this;
     }
 
     reverse() {
+
         var current = this._head;
 
         while (current != null) {
@@ -149,7 +161,6 @@ class LinkedList {
         return this;
     }
 
-
     indexOf(data) {
         this.data = data;
         var current = this._head;
@@ -163,6 +174,6 @@ class LinkedList {
         }
 
         return result;
-}
+    }
 
 module.exports = LinkedList;
